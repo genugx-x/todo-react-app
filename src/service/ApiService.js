@@ -14,6 +14,7 @@ export function call(api, method, request) {
     }
     return fetch(options.url, options).then((response) =>
         response.json().then((json) => {
+            console.log("json", json)
             if (!response.ok) {
                 // response.ok가 true이면 정상적인 리스폰스를 받은것, 아니면 에러 리스폰스를 받은것.
                 return Promise.reject(json);
