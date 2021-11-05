@@ -49,5 +49,9 @@ export function signin(userDto) {
 
 export function signout() {
     localStorage.setItem(ACCESS_TOKEN, null);
-    window.location.href= "/";
+    window.location.href= "/login";
+}
+
+export function signup(userDto) {
+    return call("/auth/signup", "POST", userDto);
 }

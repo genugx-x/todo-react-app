@@ -10,30 +10,13 @@ class App extends React.Component {
         super(props);
         this.state = {
             items: [],
+            loading: true,
         };
     }
 
-    // add = (item) => {
-    //     const thisItems = this.state.items;
-    //     item.id = "ID-" + thisItems.length; // key를 위한 id 추가
-    //     item.done = false; // done 초기화
-    //     thisItems.push(item);
-    //     this.setState({ items: thisItems}); // 업데이트는 반드시 this.setState로 해야됨
-    //     console.log("items : ", this.state.items);
-    // }
-
-    // delete = (item) => {
-    //     const thisItems = this.state.items;
-    //     console.log("Before Update items : ", this.state.items);
-    //     const newItems = thisItems.filter(e => e.id !== item.id);
-    //     this.setState({ items: newItems }, () => {
-    //         console.log("Update Items : ", this.state.items);
-    //     });
-    // }
-
     componentDidMount() {
         call("/todo", "GET", null).then((response) =>
-            this.setState({ items: response.data })
+            this.setState({ items: response.data, loading: false })
         );
     }
 
@@ -88,15 +71,23 @@ class App extends React.Component {
           </AppBar>
         );
 
-        return (
-            <div className="App">
-                {navigationBar} {/* 내비게이션 바 렌더링 */}
-                <Container maxWidth="md">
-                    <AddTodo add={this.add} />
-                    <div className="TodoList">{todoItems}</div>
-                </Container>
-            </div>
+        var todoListPage = (
+          <div>
+              {navigationBar} {/* 내비게이션 바 렌더링 */}
+              <Container maxWidth="md">
+                  <AddTodo add={this.add} />
+                  <div className="TodoList">{todoItems}</div>
+              </Container>
+          </div>
         );
+
+        var loadingPage = <h1> 로딩중.. </h1>;
+        var content = loadingPage;
+        if (!this.state.loading) {
+            content = todoListPage;
+        }
+
+        return <div className="App">{content}</div>
     }
 }
 

@@ -3,9 +3,10 @@ import "./index.css";
 import App from "./App";
 import Login from "./login";
 import { BrowserRouter as Router, Switch ,Route } from "react-router-dom"; // react-router-dom v6.0.0은 Switch 사용에 문제가 있음. v5.2.0 버전으로 설치
-
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
+
+import SignUp from "./SignUp";
 
 function Copyright() {
     return (
@@ -26,6 +27,9 @@ class AppRouter extends React.Component {
                         <Switch>
                             <Route path="/login">
                                 <Login />
+                            </Route>
+                            <Route path="/signup">
+                                <SignUp />
                             </Route>
                             <Route path="/">
                                 <App />
