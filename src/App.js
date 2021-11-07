@@ -15,6 +15,7 @@ class App extends React.Component {
     }
 
     componentDidMount() {
+        console.log("componentDidMount --- called");
         call("/todo", "GET", null).then((response) =>
             this.setState({ items: response.data, loading: false })
         );
