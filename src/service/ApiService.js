@@ -2,7 +2,6 @@ import { API_BASE_URL } from "../config/api-config";
 const ACCESS_TOKEN = "ACCESS_TOKEN";
 
 export function call(api, method, request) {
-    console.log("ApiService --- called");
     let headers = new Headers({
         "Content-Type": "application/json",
     });
@@ -19,7 +18,6 @@ export function call(api, method, request) {
         // GET method
         options.body = JSON.stringify(request);
     }
-    console.log("options", options);
     return fetch(options.url, options)
         .then((response) =>
             response.json().then((json) => {
@@ -33,8 +31,7 @@ export function call(api, method, request) {
         .catch((error) => {
            console.log(error.status);
             if (error.status === 403) { // Forbidden
-                //window.location.href = "/login"; // redirect
-                console.log(error.status === 403);
+                window.location.href = "/login"; // redirect
             }
            return Promise.reject(error);
         });
